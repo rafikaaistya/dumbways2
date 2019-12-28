@@ -1,0 +1,50 @@
+create table element 
+(
+   id_e         varchar(20)			not null,
+   name_e       varchar(20)			null,
+   multiplier	decimal(3,2)		null,
+   constraint PK_element primary key (id_e)
+);
+
+create table pokemon 
+(
+   id_p			varchar(20)			not null,
+   name_p		varchar(20)			null,
+   strength		decimal(4,2)		null,
+   id_e			varchar(20)			null,
+   constraint FK_mempunyai foreign key (id_e) references element (id_e),
+constraint PK_pokemon primary key (id_p)
+);
+
+insert into element (id_e, name_e, multiplier) values ('1', 'Fire', '1.25');
+insert into element (id_e, name_e, multiplier) values ('2', 'Water', '0.75');
+insert into element (id_e, name_e, multiplier) values ('3', 'Grass', '1');
+insert into element (id_e, name_e, multiplier) values ('4', 'Normal', '1');
+insert into element (id_e, name_e, multiplier) values ('5', 'Dragon', '1');
+
+insert into pokemon (id_p, name_p, strength, id_e) values ('1', 'Aerodactyl', '43', '5');
+insert into pokemon (id_p, name_p, strength, id_e) values ('2', 'Magnemite', '41', '3');
+insert into pokemon (id_p, name_p, strength, id_e) values ('3', 'Ninetales', '41', '4');
+insert into pokemon (id_p, name_p, strength, id_e) values ('4', 'Rattata', '43.75', '1');
+
+insert into pokedex (id_pd, name_p, modified_strength, name_e) values ('1', 'Aerodactyl', '', 'Dragon');
+insert into pokedex (id_pd, name_p, modified_strength, name_e) values ('2', 'Magnemite', '', 'Grass');
+insert into pokedex (id_pd, name_p, modified_strength, name_e) values ('3', 'Ninetales', '', 'Normal');
+insert into pokedex (id_pd, name_p, modified_strength, name_e) values ('4', 'Rattata', '', 
+
+create table PokeDex 
+(
+   id_pd         		varchar(20)			not null,
+   id_p       		varchar(20)				null,
+   modified_strength	decimal(8,3)		null,
+   id_e       		varchar(20)				null,
+   constraint FK_dari foreign key (id_e) references element (id_e),
+   constraint FK_ke foreign key (id_p) references pokemon (id_p),
+constraint PK_PokeDex primary key (id_pd)
+);
+
+insert into pokedex (id_pd, id_p, modified_strength, id_e) values ('1', '1', '', '5');
+insert into pokedex (id_pd, id_p, modified_strength, id_e) values ('2', '2', '', '3');
+insert into pokedex (id_pd, id_p, modified_strength, id_e) values ('3', '3', '', '4');
+insert into pokedex (id_pd, id_p, modified_strength, id_e) values ('4', '4', '', '1');
+
