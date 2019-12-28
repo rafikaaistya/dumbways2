@@ -1,0 +1,48 @@
+create table users_tb 
+(
+   id_u         int(20)        not null,
+   name_u       varchar(20)        null,
+   constraint PK_users_tb primary key (id_u)
+);
+
+create table skill_tb 
+(
+   id_s		varchar(20)			not null,
+   name_s		varchar(20)			null,
+   id_u	int(20)			null,
+   constraint FK_mempunyai foreign key (id_u) references users_tb (id_u),
+constraint PK_skill_tb primary key (id_s));
+);
+
+insert into users_tb (id_u, name_u) values ('1', 'haris astina');
+insert into users_tb (id_u, name_u) values ('2', 'Azizah');
+
+insert into skill_tb (id_s, name_s, id_u) values ('1', 'React Js', '1');
+insert into skill_tb (id_s, name_s, id_u) values ('2', 'HTML', '1');
+insert into skill_tb (id_s, name_s, id_u) values ('3', 'React Native', '2');
+
+insert into users_tb (id_u, name_u) values ('3', 'sera');
+
+insert into skill_tb (id_s, name_s) values ('3', 'CSS');
+insert into skill_tb (id_s, name_s) values ('4', 'PHP');
+insert into skill_tb (id_s, name_s) values ('5', 'Laravel');
+insert into skill_tb (id_s, name_s) values ('6', 'VUE');
+insert into skill_tb (id_s, name_s) values ('7', 'Javascript');
+
+UPDATE `skill_tb` SET `id_u` = '1' WHERE `skill_tb`.`name_s` = 'Laravel';
+UPDATE `skill_tb` SET `id_u` = '1' WHERE `skill_tb`.`name_s` = 'PHP';
+UPDATE `skill_tb` SET `id_u` = '1' WHERE `skill_tb`.`name_s` = 'CSS';
+
+UPDATE `skill_tb` SET `id_u` = '3' WHERE `skill_tb`.`name_s` = 'VUE';
+UPDATE `skill_tb` SET `id_u` = '3' WHERE `skill_tb`.`name_s` = 'Javascript';
+
+UPDATE `skill_tb` SET `id_u` = '1,2,3' WHERE `skill_tb`.`name_s` = 'ReactJs';
+
+SELECT * FROM skill_tb;
+
+SELECT * FROM skill_tb WHERE name_s='VUE';
+
+SELECT skill_tb.id_s, skill_tb.name_s, users_tb.id_u, users_tb.name_u
+FROM users_tb INNER JOIN skill_tb
+ON users_tb.id_u = skill_tb.id_s
+
